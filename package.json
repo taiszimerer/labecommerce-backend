@@ -1,0 +1,24 @@
+{
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4"
+  },
+  "name": "labecommerce-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node ./build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taiszimerer/labecommerce-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taiszimerer/labecommerce-backend/issues"
+  },
+  "homepage": "https://github.com/taiszimerer/labecommerce-backend#readme",
+  "description": ""
+}
