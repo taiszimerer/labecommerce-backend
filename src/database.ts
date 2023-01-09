@@ -1,8 +1,8 @@
 // atualização branch typescript-ii
-import { TProduct, TUser, TPurchase, enum } from "./types";
+import { TProduct, TUser, TPurchase, CATEGORY} from "./types";
 
 
-export const users: TUser[] = [
+export let users: TUser[] = [
     {
         id: "u1",
         email: "taiszimerer@gamil.com",
@@ -17,8 +17,8 @@ export const users: TUser[] = [
 ]
 
 //1 criar user
-export function createUser = { id: string, email: string, senha: string }: void {
-    const newUser = TUser = {
+export function createUser(id: string, email: string, password: string) : void {
+    const newUser: TUser = {
         id: id,
         email: email,
         password: password
@@ -31,6 +31,10 @@ export function createUser = { id: string, email: string, senha: string }: void 
 export function getAllUsers(): TUser[] {
     return users
 }
+
+
+
+
 
 
 export const products: TProduct[] = [
@@ -50,7 +54,7 @@ export const products: TProduct[] = [
 ]
 
 // 3 criar novo produto 
-export const function createProduct(id: string, name: string, price: number, category: CATEGORY) {
+export function createProduct(id: string, name: string, price: number, category: CATEGORY) {
     const newProduct: TProduct = {
         id: id,
         name: name,
@@ -76,7 +80,7 @@ export function getProductById(idToSearch: string): TProduct[] | undefined {
 }
 
 // 6 buscar pelo nome
-export function queryProductsByName = (q: string) => {
+export function queryProductsByName(q: string){
     const query = products.filter(
         (product) => {
             return (product.name.toLowerCase().includes(q.toLowerCase()))
@@ -88,10 +92,12 @@ export function queryProductsByName = (q: string) => {
 
 
 
+
+
 export const purchase: TPurchase[] = [
     {
         userId: "d1d",
-        productId: "jajaja",
+        productId: "baralho",
         quantity: 2,
         totalPrice: 22
     },
@@ -106,8 +112,8 @@ export const purchase: TPurchase[] = [
 ]
 
 //7 criar purchase
-export const function createPurchase(userId: string, productId: string, quantity: number, totalPrice: number) {
-    const newPurchase: TPurchase = {
+export function createPurchase(userId: string, productId: string, quantity: number, totalPrice: number) {
+    let newPurchase: TPurchase = {
         userId: userId,
         productId: productId,
         quantity: quantity,
