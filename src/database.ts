@@ -1,5 +1,5 @@
 // atualização branch typescript-ii
-import { TProduct, TUser, TPurchase, enum } from "./types";
+import { TProduct, TUser, TPurchase, CATEGORY } from "./types";
 
 
 export const users: TUser[] = [
@@ -17,8 +17,8 @@ export const users: TUser[] = [
 ]
 
 //1 criar user
-export function createUser = { id: string, email: string, senha: string }: void {
-    const newUser = TUser = {
+export function createUser(id: string, email: string, password: string ):void{
+    const newUser : TUser = {
         id: id,
         email: email,
         password: password
@@ -50,7 +50,7 @@ export const products: TProduct[] = [
 ]
 
 // 3 criar novo produto 
-export const function createProduct(id: string, name: string, price: number, category: CATEGORY) {
+export function createProduct(id: string, name: string, price: number, category: CATEGORY) {
     const newProduct: TProduct = {
         id: id,
         name: name,
@@ -76,7 +76,7 @@ export function getProductById(idToSearch: string): TProduct[] | undefined {
 }
 
 // 6 buscar pelo nome
-export function queryProductsByName = (q: string) => {
+export function queryProductsByName(q: string){
     const query = products.filter(
         (product) => {
             return (product.name.toLowerCase().includes(q.toLowerCase()))
@@ -106,7 +106,7 @@ export const purchase: TPurchase[] = [
 ]
 
 //7 criar purchase
-export const function createPurchase(userId: string, productId: string, quantity: number, totalPrice: number) {
+export function createPurchase(userId: string, productId: string, quantity: number, totalPrice: number) {
     const newPurchase: TPurchase = {
         userId: userId,
         productId: productId,
