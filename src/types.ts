@@ -15,7 +15,7 @@ export type TProduct = {
     id: string, 
     name: string, 
     price: number,
-    category: CATEGORY.ACCESSORIES
+    category: CATEGORY
 }
 
 export type TPurchase = {
