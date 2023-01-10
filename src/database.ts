@@ -39,14 +39,14 @@ export function getAllUsers(): TUser[] {
 
 export const products: TProduct[] = [
     {
-        id: "f2",
+        id: "p1",
         name: "brinco",
         price: 45,
         category: CATEGORY.ACCESSORIES
     },
 
     {
-        id: "f4",
+        id: "p2",
         name: "celular",
         price: 55,
         category: CATEGORY.ELECTRONICS
@@ -96,13 +96,13 @@ export function queryProductsByName(q: string){
 
 export const purchase: TPurchase[] = [
     {
-        userId: "d1d",
+        userId: "a001",
         productId: "baralho",
         quantity: 2,
         totalPrice: 22
     },
     {
-        userId: "gt",
+        userId: "a002",
         productId: "jogo",
         quantity: 10,
         totalPrice: 56
