@@ -1,6 +1,6 @@
 // atualização branch typescript-ii
-import { TProduct, TUser, TPurchase, CATEGORY} from "./types";
 
+import { TProduct, TUser, TPurchase, CATEGORY} from "./types";
 
 export let users: TUser[] = [
     {
@@ -113,7 +113,9 @@ export const purchase: TPurchase[] = [
 
 //7 criar purchase
 export function createPurchase(userId: string, productId: string, quantity: number, totalPrice: number) {
-    let newPurchase: TPurchase = {
+
+    const newPurchase: TPurchase = {
+
         userId: userId,
         productId: productId,
         quantity: quantity,
