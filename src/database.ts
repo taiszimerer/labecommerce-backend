@@ -1,8 +1,8 @@
 // atualização branch typescript-ii
-import { TProduct, TUser, TPurchase, CATEGORY } from "./types";
 
+import { TProduct, TUser, TPurchase, CATEGORY} from "./types";
 
-export const users: TUser[] = [
+export let users: TUser[] = [
     {
         id: "u1",
         email: "taiszimerer@gamil.com",
@@ -17,8 +17,8 @@ export const users: TUser[] = [
 ]
 
 //1 criar user
-export function createUser(id: string, email: string, password: string ):void{
-    const newUser : TUser = {
+export function createUser(id: string, email: string, password: string) : void {
+    const newUser: TUser = {
         id: id,
         email: email,
         password: password
@@ -31,6 +31,10 @@ export function createUser(id: string, email: string, password: string ):void{
 export function getAllUsers(): TUser[] {
     return users
 }
+
+
+
+
 
 
 export const products: TProduct[] = [
@@ -88,10 +92,12 @@ export function queryProductsByName(q: string){
 
 
 
+
+
 export const purchase: TPurchase[] = [
     {
         userId: "d1d",
-        productId: "jajaja",
+        productId: "baralho",
         quantity: 2,
         totalPrice: 22
     },
@@ -107,7 +113,9 @@ export const purchase: TPurchase[] = [
 
 //7 criar purchase
 export function createPurchase(userId: string, productId: string, quantity: number, totalPrice: number) {
+
     const newPurchase: TPurchase = {
+
         userId: userId,
         productId: productId,
         quantity: quantity,
