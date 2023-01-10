@@ -46,20 +46,10 @@ app.get('/products', (req: Request, res: Response) => {
     res.status(200).send(products)
 })
 
-
-//SeachProducts
-app.get('/products/search', (req: Request, res: Response)=>{
-    
-    const q = req.query.q as string
-
-    const result = products.filter((product) =>{
-        return product.name.toLowerCase().includes(q.toLowerCase())  //includes (q=nome da constante)
-    })
-
-    res.status(200).send(result) //send (nome da variavel)
+// getAllPurchases
+app.get('/purchase', (req: Request, res: Response) => {
+    res.status(200).send(purchase)
 })
-
-
 
 
 //createUser
@@ -92,13 +82,9 @@ app.post('/products', (req: Request, res: Response) => {
     res.status(201).send("Produto cadastrado com sucesso")
 })
 
-// getAllPurchases
-app.get('/purchase', (req: Request, res: Response) => {
-    res.status(200).send(purchase)
-})
 
 // createPurchase
-  app.post('/purchase', (req: Request, res: Response)=>{
+app.post('/purchase', (req: Request, res: Response) => {
     const userId = req.body.userId as string
     const productId = req.body.productId as string
     const quantity = req.body.quantity as number
@@ -113,4 +99,120 @@ app.get('/purchase', (req: Request, res: Response) => {
 
     purchase.push(newPurchase)
     res.status(201).send("Compra cadastrada com sucesso")
-  })
+})
+
+//SeachProducts
+app.get('/products/search', (req: Request, res: Response) => {
+
+    const q = req.query.q as string
+
+    const result = products.filter((product) => {
+        return product.name.toLowerCase().includes(q.toLowerCase())  //includes (q=nome da constante)
+    })
+
+    res.status(200).send(result) //send (nome da variavel)
+})
+
+//GetProductsById
+app.get('/products/:id', (req: Request, res: Response) => {
+    const id = req.params.id as string
+
+    const result = products.find((product) => product.id === id)
+
+    res.status(200).send(result)
+})
+
+//GetUserPurchaseByUserId incompleto
+app.get('/users/:id/purchase', (req: Request, res: Response) => {
+    const id = req.params.id as string
+
+
+
+    
+    res.status(200).send()
+})
+
+//DeleteUserById
+app.delete('/users/:id', (req: Request, res: Response) => {
+    const id = req.params.id as string  //salvar o id 
+
+    const userIndex = users.findIndex((user) => {
+        return user.id === id
+    })
+
+    console.log("index:", userIndex)
+
+    //metodo para apagar dentro de um array 
+    if (userIndex >= 0) {
+        users.splice(userIndex, 1)
+        res.status(200).send("User deletado com sucesso")
+    } else {  //quando nao houver users, users=0
+        res.status(404).send("User nao encontrado")
+    }
+})
+
+//EditUserById
+app.put('/users/:id', (req: Request, res: Response) => {
+
+    const id = req.params.id
+
+    const newEmail = req.body.email as string | undefined
+    const newPassword = req.body.password as string | undefined
+
+    const user = users.find((user) => {
+        return user.id === id
+    })
+
+    if (user) {
+        // se o novo dado não foi definido, então mantém o que já existe
+        user.email = newEmail || user.email
+        user.password = newPassword || user.password
+    }
+
+    res.status(200).send("Atualização realizada com sucesso")
+})
+
+
+//DeleteProductById
+app.delete('/products/:id', (req: Request, res: Response) => {
+    const id = req.params.id as string  //salvar o id 
+
+    const productIndex = products.findIndex((product) => {
+        return product.id === id
+    })
+
+    console.log("index:", productIndex)
+
+    //metodo para apagar dentro de um array 
+    if (productIndex >= 0) {
+        products.splice(productIndex, 1)
+        res.status(200).send("Produto deletado com sucesso")
+    } else {  //quando nao houver produto, produto=0
+        res.status(404).send("Produto nao encontrado")
+    }
+})
+
+//EditProductById
+app.put('/products/:id', (req: Request, res: Response) => {
+
+    const id = req.params.id
+
+    const newName = req.body.name as string | undefined
+    const newPrice = req.body.price as number | undefined
+    const newCategory = req.body.category as CATEGORY | undefined
+
+    const product = products.find((product) => {
+        return product.id === id
+    })
+
+    if (product) {
+        // se o novo dado não foi definido, então mantém o que já existe
+        product.name = newName || product.name
+        product.price = newPrice || product.price
+        product.category = newCategory || product.category
+    }
+
+    res.status(200).send("Atualização realizada com sucesso")
+})
+
+
