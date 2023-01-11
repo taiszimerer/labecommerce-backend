@@ -38,13 +38,30 @@ app.get('/ping', (req: Request, res: Response) => {
 //criando endpoint para acessar os dados
 //getallUsers
 app.get('/users', (req: Request, res: Response) => {
-    res.status(200).send(users)
+    try {
+        res.status(200).send(users)
+    } catch (error: any) {
+        console.log(error)
+        if (res.statusCode === 200) {
+            res.status(500)
+        }
+        res.send(error.message)
+    }
 })
 
 //getAllProducts
 app.get('/products', (req: Request, res: Response) => {
-    res.status(200).send(products)
+    try {
+        res.status(200).send(products)
+    } catch (error: any) {
+        console.log(error)
+        if (res.statusCode === 200) {
+            res.status(500)
+        }
+        res.send(error.message)
+    }
 })
+
 
 // getAllPurchases
 app.get('/purchase', (req: Request, res: Response) => {
@@ -54,63 +71,170 @@ app.get('/purchase', (req: Request, res: Response) => {
 
 //createUser
 app.post('/users', (req: Request, res: Response) => {
-    const id = req.body.id as string
-    const email = req.body.email as string
-    const password = req.body.password as string
+    try {
 
-    const newUser = {
-        id,
-        email,
-        password
+        const id = req.body.id as string
+        const email = req.body.email as string
+        const password = req.body.password as string
+
+        const newUser = {
+            id,
+            email,
+            password
+        }
+
+        if (typeof id !== "string") {
+            res.status(400)
+            throw new Error("'id' deve ser string")
+        }
+
+        if (typeof email !== "string") {
+            res.status(400)
+            throw new Error("'email' deve ser string")
+        }
+
+        if (typeof password !== "string") {
+            res.status(400)
+            throw new Error("'password' deve ser string")
+        }
+
+        users.push(newUser)
+        res.status(201).send("User registrado com sucesso")
+
+
+    } catch (error: any) {
+        console.log(error)
+        if (res.statusCode === 200) {
+            res.status(500)
+        }
+        res.send(error.message)
     }
-
-    users.push(newUser)
-    res.status(201).send("User registrado com sucesso")
 })
+
 
 //createProduct
 app.post('/products', (req: Request, res: Response) => {
-    const { id, name, price, category } = req.body as TProduct
+    try {
+        const { id, name, price, category } = req.body as TProduct
 
-    const newProduct = {
-        id,
-        name,
-        price,
-        category
+        const newProduct = {
+            id,
+            name,
+            price,
+            category
+        }
+
+        if (typeof id !== "string") {
+            res.status(400)
+            throw new Error("'id' deve ser do tipo string")
+        }
+
+        if (typeof name !== "string") {
+            res.status(400)
+            throw new Error("'name' deve ser do tipo string")
+        }
+
+        if (typeof price !== "number") {
+            res.status(400)
+            throw new Error("'price' deve ser do tipo number")
+        }
+
+        if (typeof category !== "string") {
+            res.status(400)
+            throw new Error("'category' deve ser do tipo string")
+        }
+
+        products.push(newProduct)
+        res.status(201).send("Produto cadastrado com sucesso")
+
+    } catch (error: any) {
+        console.log(error)
+        if (res.statusCode === 200) {
+            res.status(500)
+        }
+        res.send(error.message)
     }
-    products.push(newProduct)
-    res.status(201).send("Produto cadastrado com sucesso")
 })
 
 
 // createPurchase
 app.post('/purchase', (req: Request, res: Response) => {
-    const userId = req.body.userId as string
-    const productId = req.body.productId as string
-    const quantity = req.body.quantity as number
-    const totalPrice = req.body.totalPrice as number
+    try {
+        const userId = req.body.userId as string
+        const productId = req.body.productId as string
+        const quantity = req.body.quantity as number
+        const totalPrice = req.body.totalPrice as number
 
-    const newPurchase = {
-        userId,
-        productId,
-        quantity,
-        totalPrice
+        const newPurchase = {
+            userId,
+            productId,
+            quantity,
+            totalPrice
+        }
+
+
+        if (typeof userId !== "string") {
+            res.status(400)
+            throw new Error("'UserId' deve ser do tipo string")
+        }
+
+        if (typeof productId !== "string") {
+            res.status(400)
+            throw new Error("'productId' deve ser do tipo string")
+        }
+
+        if (typeof quantity !== "number") {
+            res.status(400)
+            throw new Error("'quantity' deve ser do tipo number")
+        }
+
+        if (typeof totalPrice !== "number") {
+            res.status(400)
+            throw new Error("'totalPrice' deve ser do tipo number")
+        }
+
+        purchase.push(newPurchase)
+        res.status(201).send("Compra cadastrada com sucesso")
+    } catch (error: any) {
+        console.log(error)
+        if (res.statusCode === 200) {
+            res.status(500)
+        }
+        res.send(error.message)
     }
 
-    purchase.push(newPurchase)
-    res.status(201).send("Compra cadastrada com sucesso")
+
 })
 
 //SeachProducts
 app.get('/products/search', (req: Request, res: Response) => {
+    try {
+        const q = req.query.q as string
 
-    const q = req.query.q as string
+        const result = products.filter((product) => {
+            return product.name.toLowerCase().includes(q.toLowerCase())  //includes (q=nome da constante)
+        })
 
-    const result = products.filter((product) => {
-        return product.name.toLowerCase().includes(q.toLowerCase())  //includes (q=nome da constante)
-    })
+        if (q.length < 1) {
+            res.status(400)
+            throw new Error("Produto deve ter no minimo 1 caractere")
+        }
 
-    res.status(200).send(result) //send (nome da variavel)
+        //produto nao econtrado, quando digita qualquer coisa
+        if (result.length < 1) {
+            res.status(400)
+            throw new Error("Produto nao encontrado")
+        }
+
+        res.status(200).send(result) //send (nome da variavel)
+
+    } catch (error: any) {
+        console.log(error)
+        if (res.statusCode === 200) {
+            res.status(500)
+        }
+        res.send(error.message)
+    }
 })
 
 //GetProductsById
@@ -128,7 +252,7 @@ app.get('/users/:id/purchase', (req: Request, res: Response) => {
 
 
 
-    
+
     res.status(200).send()
 })
 

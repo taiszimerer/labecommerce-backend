@@ -17,7 +17,7 @@ export let users: TUser[] = [
 ]
 
 //1 criar user
-export function createUser(id: string, email: string, password: string) : void {
+export function createUser(id: string, email: string, password: string) {
     const newUser: TUser = {
         id: id,
         email: email,
