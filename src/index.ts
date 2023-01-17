@@ -413,7 +413,7 @@ app.put('/products/:id', (req: Request, res: Response) => {
         }
 
         res.status(200).send("Atualização realizada com sucesso")
-        
+
     } catch (error: any) {
         console.log(error)
         if (res.statusCode === 200) {
