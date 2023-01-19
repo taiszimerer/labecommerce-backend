@@ -1,7 +1,6 @@
 -- Active: 1673874119312@@127.0.0.1@3306
 
 -- Criar tabela
-
 CREATE TABLE
     users (
         id INTEGER PRIMARY KEY UNIQUE NOT NULL,
@@ -53,8 +52,6 @@ VALUES (1, "caderno", 14, "Acessórios"), (
         "Acessorios"
     ), (5, "ipad", 2000, "Eletrônicos");
 
-    
-
 SELECT * FROM products;
 
 SELECT * FROM products WHERE name LIKE '%ipad';
@@ -101,28 +98,55 @@ CREATE TABLE
         FOREIGN KEY (buyer_id) REFERENCES users (id) --referencia tabela users
     );
 
-INSERT INTO purchases (id, total_price, paid, buyer_id)
-VALUES
-("pu001", 256, 0,  "2" ),
-("pu002", 500, 1,  "2" ),
-("pu003", 193, 0, "3" ),
-("pu004", 89, 0, "3" ),
-("pu005", 952, 1, "4" ),
-("pu006", 378, 1,  "4" );
+INSERT INTO
+    purchases (id, total_price, paid, buyer_id)
+VALUES ("pu001", 256, 0, "2"), ("pu002", 500, 1, "2"), ("pu003", 193, 0, "3"), ("pu004", 89, 0, "3"), ("pu005", 952, 1, "4"), ("pu006", 378, 1, "4");
 
 DROP TABLE purchases;
 
 SELECT * FROM purchases;
 
 UPDATE purchases
-SET delivered_at = DATETIME('now')
+SET
+    delivered_at = DATETIME('now')
 WHERE id = "pu001";
 
-SELECT * FROM purchases
-INNER JOIN users
-ON purchases.buyer_id = users.id;
+SELECT *
+FROM purchases
+    INNER JOIN users ON purchases.buyer_id = users.id;
 
-SELECT * FROM purchases
-INNER JOIN users
-ON purchases.buyer_id = users.id
-WHERE users.id = 2
+SELECT *
+FROM purchases
+    INNER JOIN users ON purchases.buyer_id = users.id
+WHERE users.id = 2;
+
+CREATE TABLE
+    purchases_products (
+        purchase_id TEXT NOT NULL,
+        product_id TEXT NOT NULL,
+        quantity INTEGER NOT NULL,
+        FOREIGN KEY (purchase_id) REFERENCES purchases (id),
+        FOREIGN KEY (product_id) REFERENCES products (id)
+    );
+
+INSERT INTO
+    purchases_products (
+        purchase_id,
+        product_id,
+        quantity
+    )
+VALUES ("pu001", 1, 15);
+
+SELECT * FROM purchases_products;
+
+DROP TABLE purchases_products;
+
+SELECT
+    purchases.id AS purchasesId,
+    products.id AS productsId,
+    products.name,
+    purchases_products.quantity,
+    purchases.total_price
+FROM purchases_products
+    INNER JOIN purchases ON purchases_products.purchase_id = purchases.id
+    INNER JOIN products ON purchases_products.product_id = products.id;
