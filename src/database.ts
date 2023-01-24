@@ -1,31 +1,34 @@
 // atualização branch typescript-ii
 
+import { toASCII } from "punycode";
 import { TProduct, TUser, TPurchase, CATEGORY} from "./types";
 
 export let users: TUser[] = [
     {
         id: "u1",
+        name: "tais",
         email: "taiszimerer@gamil.com",
         password: "1452"
     },
 
     {
         id: "u2",
+        name: "user2",
         email: "user2@email.com",
         password: "14s5"
     }
 ]
 
 //1 criar user
-export function createUser(id: string, email: string, password: string) {
-    const newUser: TUser = {
-        id: id,
-        email: email,
-        password: password
-    }
-        users.push(newUser)
-    console.log("Cadastro realizado com sucesso")
-}
+// export function createUser(id: string, email: string, password: string) {
+//     const newUser: TUser = {
+//         id: id,
+//         email: email,
+//         password: password
+//     }
+//         users.push(newUser)
+//     console.log("Cadastro realizado com sucesso")
+// }
 
 //2 pegar tds users
 export function getAllUsers(): TUser[] {
@@ -42,28 +45,30 @@ export const products: TProduct[] = [
         id: "p1",
         name: "brinco",
         price: 45,
-        category: CATEGORY.ACCESSORIES
+        category: CATEGORY.ACCESSORIES, 
+        imageUrl: "httpsll"
     },
 
     {
         id: "p2",
         name: "celular",
         price: 55,
-        category: CATEGORY.ELECTRONICS
+        category: CATEGORY.ELECTRONICS, 
+        imageUrl: "httpskla"
     }
 ]
 
 // 3 criar novo produto 
-export function createProduct(id: string, name: string, price: number, category: CATEGORY) {
-    const newProduct: TProduct = {
-        id: id,
-        name: name,
-        price: price,
-        category: category
-    }
-    products.push(newProduct)
-    console.log("Produto criado com sucesso")
-}
+// export function createProduct(id: string, name: string, price: number, category: CATEGORY) {
+//     const newProduct: TProduct = {
+//         id: id,
+//         name: name,
+//         price: price,
+//         category: category
+//     }
+//     products.push(newProduct)
+//     console.log("Produto criado com sucesso")
+// }
 
 // 4 ver todos os produtos
 export function getAllProducts(): TProduct[] {
@@ -90,36 +95,27 @@ export function queryProductsByName(q: string){
 }
 
 
-
-
-
-
 export const purchase: TPurchase[] = [
     {
-        userId: "a001",
-        productId: "baralho",
-        quantity: 2,
-        totalPrice: 22
-    },
-    {
-        userId: "a002",
-        productId: "jogo",
-        quantity: 10,
-        totalPrice: 56
+        id: "a001",
+        total_price: 2,
+        paid: 0,
+        delivered_at: "aa-dd-mm",
+        buyer_id: "pu001"
     }
-
 
 ]
 
 //7 criar purchase
-export function createPurchase(userId: string, productId: string, quantity: number, totalPrice: number) {
+export function createPurchase(id: string, total_price: number, paid: number, delivered_at: string, buyer_id: string) {
 
     const newPurchase: TPurchase = {
 
-        userId: userId,
-        productId: productId,
-        quantity: quantity,
-        totalPrice: totalPrice
+        id: id,
+        total_price: total_price,
+        paid: paid,
+        delivered_at: delivered_at,
+        buyer_id: buyer_id
     }
     purchase.push(newPurchase)
     console.log("Compra realizada com sucesso")
@@ -130,7 +126,7 @@ export function createPurchase(userId: string, productId: string, quantity: numb
 export const getAllPurchaseFromUserId = (userIdToSearch: string): TPurchase[] => {
     return purchase.filter(
         (purchase) => {
-            return (purchase.userId.toLowerCase().includes(userIdToSearch.toLowerCase()))
+            return (purchase.id.toLowerCase().includes(userIdToSearch.toLowerCase()))
         }
     )
 }
