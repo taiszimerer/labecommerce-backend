@@ -38,7 +38,8 @@ app.get('/ping', (req: Request, res: Response) => {
 //getallUsers
 app.get('/users', async (req: Request, res: Response) => {
     try {
-        const result = await db.raw(`SELECT * FROM users`)
+        // const result = await db.raw(`SELECT * FROM users`)
+        const result = await db.select("*").from("users")
         res.status(200).send(result)
 
     } catch (error: any) {
@@ -58,7 +59,8 @@ app.get('/users', async (req: Request, res: Response) => {
 //getAllProducts
 app.get('/products', async (req: Request, res: Response) => {
     try {
-        const result = await db.raw(`SELECT * FROM products`)
+        // const result = await db.raw(`SELECT * FROM products`)
+        const result = await db.select("*").from("products")
         res.status(200).send(result)
 
     } catch (error: any) {
@@ -79,7 +81,9 @@ app.get('/products', async (req: Request, res: Response) => {
 // getAllPurchases
 app.get('/purchases', async (req: Request, res: Response) => {
     try {
-        const result = await db.raw(`SELECT * FROM purchases`)
+        // const result = await db.raw(`SELECT * FROM purchases`)
+        const result = await db.select("*").from("purchases")
+
         res.status(200).send(result)
 
     } catch (error: any) {
@@ -131,10 +135,12 @@ app.post('/users', async (req: Request, res: Response) => {
             throw new Error("'password' deve ser string")
         }
 
-        await db.raw(`
-        INSERT INTO users (id, name, email, password)
-            VALUES ("${id}", "${name}", "${email}", "${password}");
-        `)
+        // await db.raw(`
+        // INSERT INTO users (id, name, email, password)
+        //     VALUES ("${id}", "${name}", "${email}", "${password}");
+        // `)
+
+        await db("users").insert({id, name, email, password})
         res.status(201).send("Cadastro de usuário registrado com sucesso")
 
     } catch (error: any) {
