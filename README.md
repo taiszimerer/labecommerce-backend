@@ -17,3 +17,5 @@ Acesse a pasta cd labecommerce-backend
 Instale as dependencias npm install
 Execute a aplicação npm run start 
 ```
+
+Documentação API: https://documenter.getpostman.com/view/24460855/2s8ZDSbjsW 
