@@ -1,4 +1,4 @@
-# Labecommerce Backend
+# LabeCommerce Backend
 
 É um e-commerce com toda a base de criação de uma API vinculada a um banco de dados real.🧡🧑‍💻
 
