@@ -25,7 +25,7 @@ export const products: TProduct[] = [
         id: "p1",
         name: "brinco",
         price: 45,
-        category: CATEGORY.ACCESSORIES, 
+        description: CATEGORY.ACCESSORIES, 
         imageUrl: "httpsll"
     },
 
@@ -33,12 +33,11 @@ export const products: TProduct[] = [
         id: "p2",
         name: "celular",
         price: 55,
-        category: CATEGORY.ELECTRONICS, 
+        description: CATEGORY.ELECTRONICS, 
         imageUrl: "httpskla"
     }
 ]
 
-// 4 ver todos os produtos
 export function getAllProducts(): TProduct[] {
     return products
 }
@@ -63,7 +62,7 @@ export function queryProductsByName(q: string){
 }
 
 
-export const purchase: TPurchase[] = [
+export const purchases: TPurchase[] = [
     {
         id: "a001",
         total_price: 2,
@@ -83,18 +82,16 @@ export function createPurchase(id: string, total_price: number, paid: number, de
         delivered_at: delivered_at,
         buyer_id: buyer_id
     }
-    purchase.push(newPurchase)
+    purchases.push(newPurchase)
     console.log("Compra realizada com sucesso")
-    console.table(purchase)
+    console.table(purchases)
 }
 
 // 8 buscarPurchase
 export const getAllPurchaseFromUserId = (userIdToSearch: string): TPurchase[] => {
-    return purchase.filter(
+    return purchases.filter(
         (purchase) => {
             return (purchase.id.toLowerCase().includes(userIdToSearch.toLowerCase()))
         }
     )
 }
-
-
