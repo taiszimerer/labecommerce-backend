@@ -1,6 +1,3 @@
-// atualização branch typescript-ii
-
-import { toASCII } from "punycode";
 import { TProduct, TUser, TPurchase, CATEGORY} from "./types";
 
 export let users: TUser[] = [
@@ -19,26 +16,9 @@ export let users: TUser[] = [
     }
 ]
 
-//1 criar user
-// export function createUser(id: string, email: string, password: string) {
-//     const newUser: TUser = {
-//         id: id,
-//         email: email,
-//         password: password
-//     }
-//         users.push(newUser)
-//     console.log("Cadastro realizado com sucesso")
-// }
-
-//2 pegar tds users
 export function getAllUsers(): TUser[] {
     return users
 }
-
-
-
-
-
 
 export const products: TProduct[] = [
     {
@@ -57,18 +37,6 @@ export const products: TProduct[] = [
         imageUrl: "httpskla"
     }
 ]
-
-// 3 criar novo produto 
-// export function createProduct(id: string, name: string, price: number, category: CATEGORY) {
-//     const newProduct: TProduct = {
-//         id: id,
-//         name: name,
-//         price: price,
-//         category: category
-//     }
-//     products.push(newProduct)
-//     console.log("Produto criado com sucesso")
-// }
 
 // 4 ver todos os produtos
 export function getAllProducts(): TProduct[] {
@@ -103,12 +71,10 @@ export const purchase: TPurchase[] = [
         delivered_at: "aa-dd-mm",
         buyer_id: "pu001"
     }
-
 ]
 
 //7 criar purchase
 export function createPurchase(id: string, total_price: number, paid: number, delivered_at: string, buyer_id: string) {
-
     const newPurchase: TPurchase = {
 
         id: id,

@@ -56,6 +56,59 @@ app.get('/users', async (req: Request, res: Response) => {
     }
 })
 
+//createUser
+app.post('/users', async (req: Request, res: Response) => {
+    try {
+        const id = req.body.id as string
+        const name = req.body.name as string
+        const email = req.body.email as string
+        const password = req.body.password as string
+
+        // const newUser = {
+        //     id,
+        //     email,
+        //     password
+        // }
+        // users.push(newUser)
+
+        if (typeof id !== "string") {
+            res.status(400)
+            throw new Error("'id' deve ser string")
+        }
+
+        if (typeof name !== "string") {
+            res.status(400)
+            throw new Error("'name' deve ser string")
+        }
+
+        if (typeof email !== "string") {
+            res.status(400)
+            throw new Error("'email' deve ser string")
+        }
+
+
+        if (typeof password !== "string") {
+            res.status(400)
+            throw new Error("'password' deve ser string")
+        }
+
+        // await db.raw(`
+        // INSERT INTO users (id, name, email, password)
+        //     VALUES ("${id}", "${name}", "${email}", "${password}");
+        // `)
+
+        await db("users").insert({id, name, email, password})
+        res.status(201).send("Cadastro de usuário registrado com sucesso")
+
+    } catch (error: any) {
+        console.log(error)
+        if (res.statusCode === 200) {
+            res.status(500)
+        }
+        res.send(error.message)
+    }
+})
+
 //getAllProducts
 app.get('/products', async (req: Request, res: Response) => {
     try {
@@ -100,63 +153,13 @@ app.get('/purchases', async (req: Request, res: Response) => {
     }
 })
 
-//createUser
-app.post('/users', async (req: Request, res: Response) => {
-    try {
-        const id = req.body.id as string
-        const name = req.body.name as string
-        const email = req.body.email as string
-        const password = req.body.password as string
 
-        // const newUser = {
-        //     id,
-        //     email,
-        //     password
-        // }
-        // users.push(newUser)
-
-        if (typeof id !== "string") {
-            res.status(400)
-            throw new Error("'id' deve ser string")
-        }
-
-        if (typeof name !== "string") {
-            res.status(400)
-            throw new Error("'name' deve ser string")
-        }
-
-        if (typeof email !== "string") {
-            res.status(400)
-            throw new Error("'email' deve ser string")
-        }
-
-        if (typeof password !== "string") {
-            res.status(400)
-            throw new Error("'password' deve ser string")
-        }
-
-        // await db.raw(`
-        // INSERT INTO users (id, name, email, password)
-        //     VALUES ("${id}", "${name}", "${email}", "${password}");
-        // `)
-
-        await db("users").insert({id, name, email, password})
-        res.status(201).send("Cadastro de usuário registrado com sucesso")
-
-    } catch (error: any) {
-        console.log(error)
-        if (res.statusCode === 200) {
-            res.status(500)
-        }
-        res.send(error.message)
-    }
-})
 
 
 //createProduct
 app.post('/products', async (req: Request, res: Response) => {
     try {
-        const { id, name, price, category, imageUrl } = req.body as TProduct
+        const { id, name, price, description, imageUrl } = req.body as TProduct
 
         // const newProduct = {
         //     id,
@@ -183,7 +186,7 @@ app.post('/products', async (req: Request, res: Response) => {
             throw new Error("'price' deve ser do tipo number")
         }
 
-        if (typeof category !== "string") {
+        if (typeof description !== "string") {
             res.status(400)
             throw new Error("'category' deve ser do tipo string")
         }
@@ -195,7 +198,7 @@ app.post('/products', async (req: Request, res: Response) => {
 
         await db.raw(`
         INSERT INTO products (id, name, price, category, imageUrl)
-            VALUES ("${id}", "${name}", "${price}", "${category}", "${imageUrl}");
+            VALUES ("${id}", "${name}", "${price}", "${description}", "${imageUrl}");
         `)
         res.status(201).send("Produto cadastrado com sucesso")
 
@@ -467,7 +470,7 @@ app.put('/products/:id', (req: Request, res: Response) => {
             // se o novo dado não foi definido, então mantém o que já existe
             product.name = newName || product.name
             product.price = newPrice || product.price
-            product.category = newCategory || product.category
+            product.description = newCategory || product.description
         }
 
         res.status(200).send("Atualização realizada com sucesso")
