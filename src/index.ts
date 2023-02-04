@@ -202,7 +202,7 @@ app.get('/products/search', async (req: Request, res: Response) => {
 //createProduct
 app.post('/products', async (req: Request, res: Response) => {
     try {
-        const { id, name, price, description, imageUrl } = req.body as TProduct
+        const { id, name, price, description, image_url } = req.body as TProduct
 
         if (typeof id !== "string") {
             res.status(400)
@@ -224,14 +224,14 @@ app.post('/products', async (req: Request, res: Response) => {
             throw new Error("'category' deve ser do tipo string")
         }
 
-        if (typeof imageUrl !== "string") {
+        if (typeof image_url !== "string") {
             res.status(400)
             throw new Error("'imageUrl' deve ser do tipo string")
         }
 
         await db.raw(`
-        INSERT INTO products (id, name, price, category, imageUrl)
-            VALUES ("${id}", "${name}", "${price}", "${description}", "${imageUrl}");
+        INSERT INTO products (id, name, price, description, image_url)
+            VALUES (${id}, "${name}", ${price}, "${description}", "${image_url}");
         `)
         res.status(201).send("Produto cadastrado com sucesso")
 
