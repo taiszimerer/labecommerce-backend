@@ -13,17 +13,17 @@ CREATE TABLE
 INSERT INTO
     users (id, name, email, password)
 VALUES (
-        1,
+       " 1",
         "tais",
         "taiszimerer@gmail.com",
         "123senha"
     ), (
-        2,
+        "2",
         "Lucas",
         "lucas@labenu.com",
         "oilabenu"
     ), (
-        3,
+        "3",
         "kiko",
         "kiko@labenu.com",
         "bolaquadrada"
@@ -36,7 +36,7 @@ SELECT * FROM users;
 INSERT INTO
     users (id, name, email, password)
 VALUES (
-        4,
+        "4",
         "barbie",
         "barbie@gmail.com",
         "123girl"
@@ -71,31 +71,31 @@ INSERT INTO
         imageUrl
     )
 VALUES (
-        1,
+        "1",
         "caderno",
         14,
         "Acessórios",
         "https://m.media-amazon.com/images/I/51LBWQZuuyL.__AC_SX300_SY300_QL70_ML2_.jpg"
     ), (
-        2,
+       " 2",
         "salto preto ponta fina",
         97,
         "Roupas e calçados",
         "https://static.zattini.com.br/produtos/scarpin-di-scarp-salto-alto-bico-fino-verniz-feminino/06/EPI-0041-006/EPI-0041-006_zoom1.jpg?ts=1564137443&ims=544x"
     ), (
-        3,
+        "3",
         "som bluetooth",
         299,
         "Eletrônicos",
         "https://imgs.casasbahia.com.br/55048203/1g.jpg?imwidth=64"
     ), (
-        4,
+        "4",
         "paleta de maquiagem",
         81,
         "Acessorios",
         "https://res.cloudinary.com/beleza-na-web/image/upload/w_297,f_auto,fl_progressive,q_auto:eco,w_80/v1/imagens/product/56222/5e78798b-35a6-4a57-821d-07fc00419689-mariana-saad-by-oceane-9-shades-paleta-de-sombras.png"
     ), (
-        5,
+        "5",
         "ipad 13 PRO",
         13000,
         "Eletrônicos",
@@ -117,13 +117,13 @@ INSERT INTO
         imageUrl
     )
 VALUES (
-        6,
+       " 6",
         "monitor",
         56,
         "Eletrônicos",
         "https.."
     ), (
-        7,
+       " 7",
         "iphone",
         556,
         "Eletrônicos",
@@ -169,7 +169,7 @@ FROM purchases
 SELECT *
 FROM purchases
     INNER JOIN users ON purchases.buyer_id = users.id
-WHERE users.id = 2;
+WHERE users.id = "2";
 
 
 --purchase/product - relacionais
@@ -189,9 +189,9 @@ INSERT INTO
         quantity
     )
 VALUES 
-("pu001", 1, 15),
-("pu002", 2, 1),
-("pu003", 5, 9);
+("pu001", "1", 15),
+("pu002", "2", 1),
+("pu003", "5", 9);
 
 SELECT * FROM purchases_products;
 
