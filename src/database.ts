@@ -5,14 +5,16 @@ export let users: TUser[] = [
         id: "u1",
         name: "tais",
         email: "taiszimerer@gamil.com",
-        password: "1452"
+        password: "1452", 
+        created_at: "now"
     },
 
     {
         id: "u2",
         name: "user2",
         email: "user2@email.com",
-        password: "14s5"
+        password: "14s5", 
+        created_at: "now"
     }
 ]
 
@@ -26,7 +28,7 @@ export const products: TProduct[] = [
         name: "brinco",
         price: 45,
         description: CATEGORY.ACCESSORIES, 
-        imageUrl: "httpsll"
+        image_url: "httpsll"
     },
 
     {
@@ -34,7 +36,7 @@ export const products: TProduct[] = [
         name: "celular",
         price: 55,
         description: CATEGORY.ELECTRONICS, 
-        imageUrl: "httpskla"
+        image_url: "httpskla"
     }
 ]
 
@@ -65,22 +67,24 @@ export function queryProductsByName(q: string){
 export const purchases: TPurchase[] = [
     {
         id: "a001",
+        buyer: "1",
         total_price: 2,
+        created_at: "now",
         paid: 0,
-        delivered_at: "aa-dd-mm",
-        buyer_id: "pu001"
+
     }
 ]
 
 //7 criar purchase
-export function createPurchase(id: string, total_price: number, paid: number, delivered_at: string, buyer_id: string) {
+export function createPurchase(id: string, buyer: string, total_price: number, created_at: string, paid: number) {
     const newPurchase: TPurchase = {
 
         id: id,
+        buyer: buyer,
         total_price: total_price,
+        created_at: created_at,
         paid: paid,
-        delivered_at: delivered_at,
-        buyer_id: buyer_id
+    
     }
     purchases.push(newPurchase)
     console.log("Compra realizada com sucesso")

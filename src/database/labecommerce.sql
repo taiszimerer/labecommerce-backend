@@ -1,4 +1,4 @@
--- Active: 1673874119312@@127.0.0.1@3306
+-- Active: 1674651518919@@127.0.0.1@3306
 
 -- Users
 CREATE TABLE
@@ -59,7 +59,7 @@ CREATE TABLE
         name TEXT NOT NULL,
         price REAL NOT NULL,
         description TEXT NOT NULL,
-        imageUrl TEXT UNIQUE NOT NULL
+        image_url TEXT UNIQUE NOT NULL
     );
 
 INSERT INTO
@@ -68,7 +68,7 @@ INSERT INTO
         name,
         price,
         description,
-        imageUrl
+        image_url
     )
 VALUES (
         "1",
@@ -113,8 +113,8 @@ INSERT INTO
         id,
         name,
         price,
-        category,
-        imageUrl
+        description,
+        image_url
     )
 VALUES (
        " 6",
